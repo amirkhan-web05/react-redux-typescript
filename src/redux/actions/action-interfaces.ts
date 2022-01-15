@@ -11,6 +11,16 @@ interface IFilteredAction {
     payload:any | string | null
 }
 
+interface ICountCartPlus {
+    type:Types.PLUS_CART_ITEM
+    payload:number
+}
+
+interface ICountMinusCart {
+    type:Types.MINUS_CART_ITEM
+    payload:number
+}
+
 export interface ISortByType {
     type:Types.SET_SORT_BY,
     payload: {
@@ -37,7 +47,7 @@ interface TypeAddToCart {
 }
 
 interface TypeRemoveToCart {
-    type:Types.REMOVE_TO_CART,
+    type:Types.REMOVE_FROM_CART,
     payload: number
 }
 
@@ -45,4 +55,4 @@ interface TypeClearCart {
     type:Types.CLEAR_CART
 }
 
-export type TypeActionCart = TypeAddToCart | ISetLoaded | ISortByType | TypeRemoveToCart | TypeClearCart | TypeCarsFetch | TypePaginate | IFilteredAction
+export type TypeActionCart = TypeAddToCart | ISetLoaded | ICountCartPlus | ICountMinusCart | ISortByType | TypeRemoveToCart | TypeClearCart | TypeCarsFetch | TypePaginate | IFilteredAction

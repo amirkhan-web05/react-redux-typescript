@@ -7,8 +7,18 @@ export const addToCart = (cart:ICartItems) => ({
 })
 
 export const removeToCart = (id:number) => ({
-    type:Types.REMOVE_TO_CART,
+    type:Types.REMOVE_FROM_CART,
     payload: id
+})
+
+export const plusCartItem = (id:number) => ({
+    type:Types.PLUS_CART_ITEM,
+    payload:id
+})
+
+export const minusCartItem = (id:number) => ({
+    type:Types.MINUS_CART_ITEM,
+    payload:id
 })
 
 export const clearCart = () => ({
