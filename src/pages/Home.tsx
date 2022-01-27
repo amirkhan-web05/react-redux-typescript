@@ -8,9 +8,10 @@ import {setPaginate} from "../redux/actions/action-paginate";
 import {CartNumber} from "../components/CartNumber";
 import {Categories} from "../components/Categories";
 import {setCategories, setSortBy} from "../redux/actions/action-filtered";
-import {addToCart} from "../redux/actions/action-cart";
+import {addToCart, fetchPostsCars} from "../redux/actions/action-cart";
 import {Loaded} from "../components/Loaded";
 import {SortByPopup} from "../components/SortByPopup";
+import { createPages } from '../utils/creatorPages';
 
 type TypeObject = {
     name:string,
@@ -27,9 +28,11 @@ export const Home:React.FC = () => {
     const filtered = useTypedSelector<string | null>(({filtered}) => filtered.categories)
     const sortByItems = useTypedSelector<any>(({filtered}) => filtered.sortBy)
     const loaded = useTypedSelector<boolean>(state => state.cars.loaded)
+    const totalCount = useTypedSelector<number>(state => state.paginate.totalCount)
     const [value, setValue] = React.useState<string>('')
+    const pagesCount = Math.ceil(totalCount / perPage)    
 
-    const pages:Array<number> = [1,2,3,4,5,6,7,8]
+    const pages:Array<number> = []
     const categories:Array<string> = ['BMW', 'Mercedes', 'Audi', 'Mazda', 'Skoda', 'Ram', 'Nissan', 'Porsche']
 
     const sortItems:TypeObject[] = [
@@ -37,6 +40,8 @@ export const Home:React.FC = () => {
         {name:'Price', type:'price', order:'desc'},
         {name: 'alphabet', type: 'name', order: 'asc'},
     ];
+
+    createPages(pages, pagesCount, currentPage)
 
     const setCurrentPages = (page:number) => {
         dispatch(setPaginate(page))
@@ -72,7 +77,7 @@ export const Home:React.FC = () => {
     }
 
     const handlerToCart = (cart:ICartItems) => {
-        dispatch(addToCart(cart))
+        dispatch(fetchPostsCars(cart))
     }
 
     return (

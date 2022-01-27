@@ -1,5 +1,13 @@
+import { postCars } from './../../api/api';
+import { Dispatch } from 'react';
 import {Types} from "../types";
 import {ICartItems} from "../../interfaces";
+
+export const fetchPostsCars = (cart:ICartItems) => (dispatch:Dispatch<any>) => {
+    postCars(cart).then(({data}) => {
+        dispatch(addToCart(data))
+    })
+}
 
 export const addToCart = (cart:ICartItems) => ({
     type:Types.ADD_TO_CART,

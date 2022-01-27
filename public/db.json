@@ -48,5 +48,14 @@
       "price": 15200,
       "count": 1
     }
+  ],
+  "cart": [
+    {
+      "id": 8,
+      "name": "Porsche",
+      "price": 15200,
+      "count": 1,
+      "types": "Default"
+    }
   ]
 }
